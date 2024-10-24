@@ -1,13 +1,119 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+* {
+  /*margin: 0;
+  padding: 0;*/
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+nav {
+  background-color: navy;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 0 1rem;
+  /*padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+ list-style: none;
+  display: flex;
+  /*justify-content: center;
+  align-items: center;*/
+  gap: 1rem;
+}
+
+nav ul li a {
+  color: #f9f9f9;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: .25rem;
+  transition: color 0.3s, background-color 0.3s;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #777;
+  color: #fff;
+}
+
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+h2 {
+  padding: 5px;
+}
+
+
+.content {
+  background-color: #fff;
+  padding: 30px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+}
+
+/*.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}*/
+
+.form-group {
+  text-align: center;
+}
+
+.add-button {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.entries-list {
+  display: inline-flexbox;
+  align-content: center;
+  justify-content: center;
+  padding-left: 300px;
+  
+}
+
+.streamlist-form {
+  display: block;
+  align-content: center;
+  justify-content: center;
+}
+
+.subbutton {
+  padding-left: 370px;
+  margin-top: 3px;
 }
