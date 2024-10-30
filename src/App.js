@@ -5,6 +5,10 @@ import StreamList from './Components/StreamList';
 import Movies from './Components/Movies';
 import Cart from './Components/Cart';
 import About from './Components/About';
+// src/index.js or src/App.js
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 function App() {
   return (
@@ -23,3 +27,5 @@ function App() {
 }
 
 export default App;
+
+
