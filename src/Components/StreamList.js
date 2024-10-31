@@ -4,9 +4,7 @@ const StreamList = () => {
   const [input, setInput] = useState('');
   const [type, setType] = useState('Movie'); 
   const [entries, setEntries] = useState([]); 
-  const [isEditing, setIsEditing] = useState(null); 
-  const [editInput, setEditInput] = useState(''); 
-  const [editType, setEditType] = useState('Movie'); 
+  const [editingEntry, setEditingEntry] = useState(null); 
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -18,39 +16,38 @@ const StreamList = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newEntry = { id: Date.now(), title: input, type }; 
-    setEntries([...entries, newEntry]);
+    if (entries.some(entry => entry.title === input && entry.type === type)) {
+      alert('This entry already exists!');
+      return;
+    }
+    const newEntry = { id: Date.now(), title: input, type, completed: false }; 
+    setEntries(prevEntries => [...prevEntries, newEntry]);
     setInput('');
   };
 
   const handleDelete = (deleteEntry) => {
-    const updatedList = entries.filter((entry) => entry.id !== deleteEntry.id);
-    setEntries(updatedList);
+    setEntries(entries.filter((entry) => entry.id !== deleteEntry.id));
   };
 
   const handleComplete = (entryToComplete) => {
-    const updatedItems = entries.map((entry) =>
+    setEntries(prevEntries => prevEntries.map((entry) =>
       entry.id === entryToComplete.id
         ? { ...entry, completed: !entry.completed }
         : entry
-    );
-    setEntries(updatedItems);
+    ));
   };
 
   const handleEdit = (entry) => {
-    setIsEditing(entry.id); 
-    setEditInput(entry.title); 
-    setEditType(entry.type); 
+    setEditingEntry(entry);
   };
 
-  const handleSaveEdit = (entryToEdit) => {
-    const updatedItems = entries.map((entry) =>
-      entry.id === entryToEdit.id ? { ...entry, title: editInput, type: editType } : entry
-    );
-    setEntries(updatedItems);
-    setIsEditing(null); 
-    setEditInput(''); 
-    setEditType('Movie'); 
+  const handleSaveEdit = () => {
+    setEntries(prevEntries => prevEntries.map((entry) =>
+      entry.id === editingEntry.id ? { ...entry, title: input, type } : entry
+    ));
+    setEditingEntry(null);
+    setInput('');
+    setType('Movie');
   };
 
   return (
@@ -60,7 +57,6 @@ const StreamList = () => {
         <div className="form-group">
           <input
             type="text"
-            id="titleInput"
             value={input}
             onChange={handleInputChange}
             placeholder="Enter a Movie or Show"
@@ -70,7 +66,6 @@ const StreamList = () => {
         </div>
         <div className="form-group">
           <select
-            id="typeSelect"
             value={type}
             onChange={handleTypeChange}
             className="form-select"
@@ -89,22 +84,22 @@ const StreamList = () => {
         <ul>
           {entries.map((entry) => (
             <li key={entry.id}>
-              {isEditing === entry.id ? (
+              {editingEntry && editingEntry.id === entry.id ? (
                 <>
                   <input
                     type="text"
-                    value={editInput}
-                    onChange={(e) => setEditInput(e.target.value)}
+                    value={input}
+                    onChange={handleInputChange}
                   />
                   <select
-                    value={editType}
-                    onChange={(e) => setEditType(e.target.value)}
+                    value={type}
+                    onChange={handleTypeChange}
                     className="form-select"
                   >
                     <option value="Movie">Movie</option>
                     <option value="Show">Show</option>
                   </select>
-                  <button onClick={() => handleSaveEdit(entry)}>Save</button>
+                  <button onClick={handleSaveEdit}>Save</button>
                 </>
               ) : (
                 <>
@@ -125,4 +120,5 @@ const StreamList = () => {
 };
 
 export default StreamList;
+
 
