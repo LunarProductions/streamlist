@@ -1,10 +1,9 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorker'; 
- 
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,9 +12,20 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-
-serviceWorker.register();
+// Register the service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/serviceWorker.js')
+      .then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
 
 reportWebVitals();
+
 
 
